@@ -5,12 +5,12 @@ import random
 class logogame:
     def __init__(self):
 
-        with open('assets/filelist.txt', 'r') as file:
+        with open('../assets/filelist.txt', 'r') as file:
             c = file.readlines()
             self.st = [e.replace('\n', '') for e in c]
 
     async def makepool(self):
-        self.db = await aiosqlite.connect('assets/logodata.db')
+        self.db = await aiosqlite.connect('../assets/logodata.db')
         self.cursor = await self.db.cursor()
 
     async def crafthint(self, text):

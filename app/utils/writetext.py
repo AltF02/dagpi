@@ -1,10 +1,12 @@
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
+
+
 # Requirement: PIL <http://www.pythonware.com/products/pil/>
 # Copyright 2011 Álvaro Justen [alvarojusten at gmail dot com]
 # License: GPL <http://www.gnu.org/copyleft/gpl.html>
 
-#With modifications by Daggy1234 (dagggy@daggy.tech)
+# With modifications by Daggy1234 (dagggy@daggy.tech)
 
 class writetext(object):
     def __init__(self, im: Image):
@@ -25,27 +27,27 @@ class writetext(object):
         font_size = 1
         text_size = self.get_text_size(font, font_size, text)
         if (max_width is not None and text_size[0] > max_width) or (
-            max_height is not None and text_size[1] > max_height
+                max_height is not None and text_size[1] > max_height
         ):
             raise ValueError("Text can't be filled in only (%dpx, %dpx)" % text_size)
         while True:
             if (max_width is not None and text_size[0] >= max_width) or (
-                max_height is not None and text_size[1] >= max_height
+                    max_height is not None and text_size[1] >= max_height
             ):
                 return font_size - 1
             font_size += 1
             text_size = self.get_text_size(font, font_size, text)
 
     def write_text(
-        self,
-        x,
-        y,
-        text,
-        font_filename,
-        font_size,
-        max_width=None,
-        max_height=None,
-        color=(0, 0, 0),
+            self,
+            x,
+            y,
+            text,
+            font_filename,
+            font_size,
+            max_width=None,
+            max_height=None,
+            color=(0, 0, 0),
     ):
 
         if font_size == "fill" and (max_width is not None or max_height is not None):
@@ -64,16 +66,16 @@ class writetext(object):
         return font.getsize(text)
 
     def write_text_box(
-        self,
-        x,
-        y,
-        text,
-        box_width,
-        font_filename,
-        font_size,
-        color,
-        place="left",
-        justify_last_line=False,
+            self,
+            x,
+            y,
+            text,
+            box_width,
+            font_filename,
+            font_size,
+            color,
+            place="left",
+            justify_last_line=False,
     ):
         lines = []
         line = []
@@ -110,7 +112,7 @@ class writetext(object):
             elif place == "justify":
                 words = line.split()
                 if (index == len(lines) - 1 and not justify_last_line) or len(
-                    words
+                        words
                 ) == 1:
                     self.write_text(
                         x, height, line, font_filename, font_size, color=color
